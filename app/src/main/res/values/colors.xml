@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="color_primary">#C91C22</color>
+    <color name="color_primary_darker">#791114</color>
+    <color name="color_primary_alt">#CE3338</color>
+    <color name="color_primary_alt_darker">#7C1F22</color>
+
+    <color name="text_android_black_default">#DE000000</color>
+    <color name="text_android_black_hint">#61000000</color>
+    <color name="text_android_black_disabled">#30000000</color>
+    <color name="text_android_white_default">#FFFFFFFF</color>
+    <color name="text_android_white_hint">#80FFFFFF</color>
+    <color name="text_android_white_disabled">#40FFFFFF</color>
+
+    <color name="text_input_layout_outline">#808080</color>
+    <color name="text_input_layout_outline_focused">#1A1A1A</color>
+    <color name="text_input_layout_outline_disabled">#F2F2F2</color>
+
+    <color name="text_input_layout_hint_text_color">#808080</color>
+    <color name="text_input_layout_hint_text_color_focused">#1A1A1A</color>
+    <color name="text_input_layout_hint_text_color_disabled">#F2F2F2</color>
 </resources>

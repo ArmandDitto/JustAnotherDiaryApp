@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomOutlineBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>
+        <item name="android:textColorHint">@color/text_color_hint</item>
+        <item name="hintTextColor">@color/text_input_layout_hint_text_color_focused</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_default</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_default</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_default</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_default</item>
+    </style>
+
+</resources>
