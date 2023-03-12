@@ -20,6 +20,7 @@ class LoginViewModel(
 
     fun login(loginRequest: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {
+            _loginLiveData.postValue(ResultWrapper.Loading)
             _loginLiveData.postValue(repository.login(loginRequest))
         }
     }

@@ -1,6 +1,8 @@
 package com.example.justordinarydiaryapp.data.repository
 
+import com.example.justordinarydiaryapp.model.User
 import com.example.justordinarydiaryapp.model.request.LoginRequest
+import com.example.justordinarydiaryapp.model.request.RegisterRequest
 import com.example.justordinarydiaryapp.model.response.LoginResponse
 import com.example.justordinarydiaryapp.network.ApiService
 import com.example.justordinarydiaryapp.network.model.ResultWrapper
@@ -16,5 +18,10 @@ class AuthRepositoryImpl(
     override suspend fun login(loginRequest: LoginRequest): ResultWrapper<LoginResponse> {
         return safeApiCall(dispatcher) { apiService.login(loginRequest) }
     }
+
+    override suspend fun register(registerRequest: RegisterRequest): ResultWrapper<User> {
+        return safeApiCall(dispatcher) { apiService.register(registerRequest) }
+    }
+
 
 }

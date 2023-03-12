@@ -33,13 +33,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpObserver() {
         viewModel.loginLiveData.observe(this) {
-            when(it) {
+            when (it) {
                 is ResultWrapper.Loading -> {
 
                 }
+
                 is ResultWrapper.Success -> {
                     this.showDefaultToast(GsonBuilder().create().toJson(it.value))
                 }
+
                 is ResultWrapper.Error -> {
                     this.showDefaultToast(GsonBuilder().create().toJson(it.message))
                 }

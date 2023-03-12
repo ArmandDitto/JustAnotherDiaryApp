@@ -1,3 +1,43 @@
 <resources>
+
     <string name="app_name">JustOrdinaryDiaryApp</string>
+
+    <string name="text_action_close">Close</string>
+    <string name="text_action_login">Login</string>
+    <string name="text_action_register">Register</string>
+    <string name="text_action_continue">Continue</string>
+    <string name="text_action_retry">Retry</string>
+
+    <string name="text_alert_dialog_title_success_default">Success</string>
+    <string name="text_alert_dialog_desc_success_default">Task completed successfully</string>
+    <string name="text_alert_dialog_title_error_default">Oops</string>
+    <string name="text_alert_dialog_desc_error_default">Something went wrong</string>
+
+    <string name="text_error_form_field_is_required">This field is required</string>
+    <string name="text_error_form_remaining_field">Please fill the remaining field</string>
+    <string name="text_error_email_invalid_email">Please input valid email</string>
+    <string name="text_error_password_alphanumeric_only">The password should only contain letters and numbers</string>
+    <string name="text_error_password_fill_password_first">Please fill the password first</string>
+    <string name="text_error_password_unmatched_password">Password is unmatched</string>
+
+    <string name="text_login_label_login_title">Login</string>
+    <string name="text_login_label_email">Email</string>
+    <string name="text_login_hint_email">Enter email</string>
+    <string name="text_login_label_password">Password</string>
+    <string name="text_login_hint_password">Enter password</string>
+    <string name="text_login_full_register_here">Didn\'t have Account ? Register here</string>
+    <string name="text_login_clickable_register_here">Register here</string>
+
+    <string name="text_register_label_register_title">Register</string>
+    <string name="text_register_label_email">Email</string>
+    <string name="text_register_hint_email">Enter email</string>
+    <string name="text_register_label_username">Username</string>
+    <string name="text_register_hint_username">Enter username</string>
+    <string name="text_register_label_password">Password</string>
+    <string name="text_register_hint_password">Enter password</string>
+    <string name="text_register_label_confirm_password">Confirm Password</string>
+    <string name="text_register_hint_confirm_password">Enter confirm password</string>
+    <string name="text_register_full_login_here">Already have Account ? Login here</string>
+    <string name="text_register_clickable_login_here">Login here</string>
+
 </resources>

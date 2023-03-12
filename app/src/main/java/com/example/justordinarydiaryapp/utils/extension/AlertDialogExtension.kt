@@ -29,3 +29,30 @@ fun FragmentManager.showErrorDialog(
     ft.add(dialog, null)
     ft.commit()
 }
+
+fun FragmentManager.showSuccessDialog(
+    title: String? = null,
+    desc: String? = null,
+    btnPositiveText: String? = null,
+    onPositiveBtnClick: (() -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
+    withCloseIcon: Boolean = false,
+    isCancelable: Boolean = false
+) {
+    val dialog = BaseAlertDialog()
+
+    dialog.setContent(
+        title = title ?: "Success",
+        desc = desc ?: "Task Success",
+        imageSrc = null,
+        btnPositiveText = btnPositiveText ?: "Continue",
+        onPositiveBtnClick = onPositiveBtnClick,
+        onDismiss = onDismiss,
+        withCloseIcon = withCloseIcon,
+        isCancelable = isCancelable
+    )
+
+    val ft = beginTransaction()
+    ft.add(dialog, null)
+    ft.commit()
+}

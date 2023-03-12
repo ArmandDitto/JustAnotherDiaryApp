@@ -12,8 +12,10 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
+import com.example.justordinarydiaryapp.R
 import com.example.justordinarydiaryapp.utils.extension.showDefaultToast
 import com.example.justordinarydiaryapp.utils.extension.showErrorDialog
+import com.example.justordinarydiaryapp.utils.extension.showSuccessDialog
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
@@ -49,6 +51,30 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         _binding = null
     }
 
+    fun showToast(message: String) {
+        requireContext().showDefaultToast(message)
+    }
+
+    fun showSuccessDialog(
+        title: String? = null,
+        desc: String? = null,
+        btnPositiveText: String? = null,
+        onPositiveBtnClick: (() -> Unit)? = null,
+        onDismiss: (() -> Unit)? = null,
+        withCloseIcon: Boolean = false,
+        isCancelable: Boolean = false
+    ) {
+        activity?.supportFragmentManager?.showSuccessDialog(
+            title = title ?: getString(R.string.text_alert_dialog_title_success_default),
+            desc = desc ?: getString(R.string.text_alert_dialog_desc_success_default),
+            btnPositiveText = btnPositiveText ?: getString(R.string.text_action_continue),
+            onPositiveBtnClick = onPositiveBtnClick,
+            onDismiss = onDismiss,
+            withCloseIcon = withCloseIcon,
+            isCancelable = isCancelable
+        )
+    }
+
     fun showErrorDialog(
         title: String? = null,
         desc: String? = null,
@@ -59,18 +85,14 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         isCancelable: Boolean = false
     ) {
         activity?.supportFragmentManager?.showErrorDialog(
-            title = title,
-            desc = desc,
-            btnPositiveText = btnPositiveText,
+            title = title ?: getString(R.string.text_alert_dialog_title_error_default),
+            desc = desc ?: getString(R.string.text_alert_dialog_desc_error_default),
+            btnPositiveText = btnPositiveText ?: getString(R.string.text_action_retry),
             onPositiveBtnClick = onPositiveBtnClick,
             onDismiss = onDismiss,
             withCloseIcon = withCloseIcon,
             isCancelable = isCancelable
         )
-    }
-
-    fun showToast(message: String) {
-        requireContext().showDefaultToast(message)
     }
 
 }
