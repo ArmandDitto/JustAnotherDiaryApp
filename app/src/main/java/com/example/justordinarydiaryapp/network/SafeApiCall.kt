@@ -52,7 +52,8 @@ fun parseRetrofitException(exception: HttpException): String {
         if (errorMessage.isBlank() || errorMessage.equals(null) || errorMessage == "null") {
             "$errorCode - ${httpStatusCode.statusName}"
         } else {
-            "$errorCode - $errorMessage"
+            errorMessage
+//            "$errorCode - $errorMessage" //TODO enable this instead L:55 to show the error code
         }
 
     return errorMessage

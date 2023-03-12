@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.justordinarydiaryapp.model.request.LoginRequest
 import com.example.justordinarydiaryapp.network.model.ResultWrapper
 import com.example.justordinarydiaryapp.presentation.login.LoginViewModel
-import com.example.justordinarydiaryapp.utils.showDefaultToast
+import com.example.justordinarydiaryapp.utils.extension.showDefaultToast
 import com.google.gson.GsonBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

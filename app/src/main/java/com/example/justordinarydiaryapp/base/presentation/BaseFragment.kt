@@ -1,19 +1,19 @@
 package com.example.justordinarydiaryapp.base.presentation
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
+import com.example.justordinarydiaryapp.utils.extension.showDefaultToast
+import com.example.justordinarydiaryapp.utils.extension.showErrorDialog
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
@@ -49,31 +49,28 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         _binding = null
     }
 
-//    @CallSuper
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        if (shouldAddBackStackListener()) {
-//            fragmentBackStackListener = FragmentManager.OnBackStackChangedListener {
-//                onBackStackChanged()
-//            }.also {
-//                parentFragmentManager.addOnBackStackChangedListener(it)
-//            }
-//        }
-//
-//        if (shouldInterceptBackPress()) {
-//            onBackPressCallback =
-//                requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-//                    onBackPressHandler()
-//                }
-//        }
-//    }
-//
-//    open fun onBackPressHandler() {}
-//
-//    @CallSuper
-//    open fun onBackStackChanged() {
-//        onBackPressCallback?.isEnabled = parentFragmentManager.fragments.lastOrNull() == this
-//    }
+    fun showErrorDialog(
+        title: String? = null,
+        desc: String? = null,
+        btnPositiveText: String? = null,
+        onPositiveBtnClick: (() -> Unit)? = null,
+        onDismiss: (() -> Unit)? = null,
+        withCloseIcon: Boolean = false,
+        isCancelable: Boolean = false
+    ) {
+        activity?.supportFragmentManager?.showErrorDialog(
+            title = title,
+            desc = desc,
+            btnPositiveText = btnPositiveText,
+            onPositiveBtnClick = onPositiveBtnClick,
+            onDismiss = onDismiss,
+            withCloseIcon = withCloseIcon,
+            isCancelable = isCancelable
+        )
+    }
+
+    fun showToast(message: String) {
+        requireContext().showDefaultToast(message)
+    }
 
 }

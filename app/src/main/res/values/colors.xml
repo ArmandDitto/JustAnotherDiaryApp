@@ -5,6 +5,9 @@
     <color name="color_primary_alt">#CE3338</color>
     <color name="color_primary_alt_darker">#7C1F22</color>
 
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
+
     <color name="text_android_black_default">#DE000000</color>
     <color name="text_android_black_hint">#61000000</color>
     <color name="text_android_black_disabled">#30000000</color>
