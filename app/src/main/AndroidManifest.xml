@@ -38,6 +38,10 @@
             android:name=".presentation.home.HomeActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".presentation.diary.NewDiaryActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

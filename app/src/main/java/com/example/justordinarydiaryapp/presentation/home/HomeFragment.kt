@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.justordinarydiaryapp.base.presentation.BaseFragment
 import com.example.justordinarydiaryapp.databinding.FragmentHomeBinding
+import com.example.justordinarydiaryapp.presentation.diary.NewDiaryActivity
 import com.example.justordinarydiaryapp.presentation.login.LoginActivity
 import com.example.justordinarydiaryapp.utils.Constants
+import com.example.justordinarydiaryapp.utils.DateTimeHelper
+import com.example.justordinarydiaryapp.utils.DateTimeHelper.FORMAT_DAY_MONTHNAME_YEAR_HOUR24_MINUTE
+import com.example.justordinarydiaryapp.utils.DateTimeHelper.FORMAT_YEAR_MONTH_DAY_HOUR24_MINUTE_SECOND_MILLISECOND_TIMEZONE
 import com.example.justordinarydiaryapp.utils.preference.PreferencesHelper
+import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -22,6 +27,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.txtUser.setOnClickListener {
             PreferencesHelper.customPrefs(Constants.PREF_NAME).edit().clear().apply()
             LoginActivity.launchIntent(requireContext())
+        }
+
+        binding.btnCompose.setOnClickListener {
+            NewDiaryActivity.launchIntent(requireContext())
         }
 
     }
