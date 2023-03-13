@@ -3,6 +3,7 @@ package com.example.justordinarydiaryapp.data.repository
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.model.request.DiaryRequest
 import com.example.justordinarydiaryapp.network.ApiService
+import com.example.justordinarydiaryapp.network.model.PagingWrapper
 import com.example.justordinarydiaryapp.network.model.ResultWrapper
 import com.example.justordinarydiaryapp.network.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,6 +16,10 @@ class DiaryRepositoryImpl(
 
     override suspend fun createNewDiary(request: DiaryRequest): ResultWrapper<Diary> {
         return safeApiCall(dispatcher) { apiService.crateNewDiary(request) }
+    }
+
+    override suspend fun getDiariesPaging(page: Int): PagingWrapper<List<Diary>> {
+        return apiService.getDiariesPaging(page)
     }
 
 }

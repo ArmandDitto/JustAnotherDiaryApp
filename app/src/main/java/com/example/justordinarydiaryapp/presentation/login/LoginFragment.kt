@@ -119,7 +119,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     isValid = false
                 } else if (!ValidationHelper.isValidPassword(txtPassword)) {
                     txtPassword.requestFocus()
-                    txtPasswordLayout.error = getString(R.string.text_error_password_alphanumeric_only)
+                    txtPasswordLayout.error =
+                        getString(R.string.text_error_password_alphanumeric_only)
                     isValid = false
                 }
 

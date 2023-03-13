@@ -7,6 +7,7 @@
 
     <color name="color_black">#000000</color>
     <color name="color_white">#FFFFFF</color>
+    <color name="color_transparant_black">#CC000000</color>
 
     <color name="text_android_black_default">#DE000000</color>
     <color name="text_android_black_hint">#61000000</color>
