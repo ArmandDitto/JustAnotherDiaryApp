@@ -27,8 +27,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             bottomNavigation.setOnItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.menu_home -> viewPager.currentItem = 0
-//                    R.id.menu_search -> viewPager.currentItem = 1
-//                    R.id.menu_profile -> viewPager.currentItem = 2
+                    R.id.menu_search -> viewPager.currentItem = 1
+                    R.id.menu_profile -> viewPager.currentItem = 2
                 }
                 false
             }
