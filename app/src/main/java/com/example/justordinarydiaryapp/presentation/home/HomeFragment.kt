@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.justordinarydiaryapp.base.presentation.BaseFragment
 import com.example.justordinarydiaryapp.databinding.FragmentHomeBinding
+import com.example.justordinarydiaryapp.presentation.login.LoginActivity
+import com.example.justordinarydiaryapp.utils.Constants
+import com.example.justordinarydiaryapp.utils.preference.PreferencesHelper
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -15,6 +18,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.txtToken.setOnClickListener { showToast(PreferencesHelper.authToken.toString()) }
+        binding.txtUser.setOnClickListener {
+            PreferencesHelper.customPrefs(Constants.PREF_NAME).edit().clear().apply()
+            LoginActivity.launchIntent(requireContext())
+        }
 
     }
 

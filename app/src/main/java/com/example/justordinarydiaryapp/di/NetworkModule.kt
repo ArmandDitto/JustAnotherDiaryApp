@@ -5,12 +5,15 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.example.justordinarydiaryapp.network.ApiService
+import com.example.justordinarydiaryapp.utils.Constants
 import com.example.justordinarydiaryapp.utils.Constants.NETWORK_HEADER_ACCEPT_NAME
 import com.example.justordinarydiaryapp.utils.Constants.NETWORK_HEADER_ACCEPT_VALUE
 import com.example.justordinarydiaryapp.utils.Constants.NETWORK_HEADER_CONTENT_TYPE_NAME
 import com.example.justordinarydiaryapp.utils.Constants.NETWORK_HEADER_CONTENT_TYPE_VALUE
 import com.example.justordinarydiaryapp.utils.JNIUtil
 import com.example.justordinarydiaryapp.utils.NetworkHelper
+import com.example.justordinarydiaryapp.utils.preference.PreferencesHelper
+import com.example.justordinarydiaryapp.utils.preference.PreferencesHelper.get
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -59,8 +62,15 @@ object NetworkModule {
         val customHeaderInterceptor = Interceptor { chain ->
             val original = chain.request()
 
+            val authToken = PreferencesHelper.authToken
+            val bearerToken: String = if(authToken != null) {
+                "Bearer $authToken"
+            } else {
+                "Bearer"
+            }
+
             val requestBuilder = original.newBuilder()
-                .addHeader("Authorization", "Bearer ") //TODO
+                .addHeader("Authorization", bearerToken)
                 .addHeader(NETWORK_HEADER_CONTENT_TYPE_NAME, NETWORK_HEADER_CONTENT_TYPE_VALUE)
                 .addHeader(NETWORK_HEADER_ACCEPT_NAME, NETWORK_HEADER_ACCEPT_VALUE)
 

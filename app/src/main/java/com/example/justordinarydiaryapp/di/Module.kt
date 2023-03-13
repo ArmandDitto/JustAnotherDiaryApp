@@ -13,7 +13,8 @@ object Module {
         appModules,
         NetworkModule.modules,
         RepositoryModule.modules,
-        ViewModelModule.modules
+        ViewModelModule.modules,
+        NavigationModule.modules
     )
 
 }
