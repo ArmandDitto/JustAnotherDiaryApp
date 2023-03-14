@@ -9,6 +9,10 @@ interface DiaryRepository {
 
     suspend fun createNewDiary(request: DiaryRequest): ResultWrapper<Diary>
 
+    suspend fun getDiaryDetail(diaryId: String): ResultWrapper<Diary>
+
+    suspend fun getEditDiary(diaryId: String, request: DiaryRequest): ResultWrapper<Diary>
+
     suspend fun getDiariesPaging(
         page: Int,
     ): PagingWrapper<List<Diary>>

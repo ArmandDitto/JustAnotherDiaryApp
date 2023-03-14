@@ -42,6 +42,14 @@
             android:name=".presentation.diary.NewDiaryActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".presentation.diary.DiaryDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".presentation.diary.EditDiaryActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

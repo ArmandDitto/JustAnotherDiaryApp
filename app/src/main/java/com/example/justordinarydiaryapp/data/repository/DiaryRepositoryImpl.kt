@@ -18,6 +18,17 @@ class DiaryRepositoryImpl(
         return safeApiCall(dispatcher) { apiService.crateNewDiary(request) }
     }
 
+    override suspend fun getDiaryDetail(diaryId: String): ResultWrapper<Diary> {
+        return safeApiCall(dispatcher) { apiService.getDiaryDetail(diaryId) }
+    }
+
+    override suspend fun getEditDiary(
+        diaryId: String,
+        request: DiaryRequest
+    ): ResultWrapper<Diary> {
+        return safeApiCall(dispatcher) { apiService.editDiary(diaryId, request) }
+    }
+
     override suspend fun getDiariesPaging(page: Int): PagingWrapper<List<Diary>> {
         return apiService.getDiariesPaging(page)
     }

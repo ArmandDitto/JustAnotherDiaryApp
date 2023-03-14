@@ -1,9 +1,12 @@
 package com.example.justordinarydiaryapp.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class Diary (
+@Parcelize
+data class Diary(
 
     @SerializedName("id")
     val id: String? = null,
@@ -23,4 +26,4 @@ data class Diary (
     @SerializedName("updated_at")
     val updatedAt: String? = null
 
-)
+) : Parcelable

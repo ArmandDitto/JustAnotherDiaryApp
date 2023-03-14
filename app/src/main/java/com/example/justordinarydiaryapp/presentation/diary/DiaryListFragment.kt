@@ -50,7 +50,7 @@ class DiaryListFragment : BaseFragment<FragmentDiaryListBinding>() {
         diaryItemAdapter = DiaryItemAdapter(requireContext()).apply {
             onRootClick = {
                 it.id?.let { id ->
-                    showToast(id)
+                    DiaryDetailActivity.launchIntent(requireContext(), id)
                 }
             }
             addLoadStateListener { loadState ->

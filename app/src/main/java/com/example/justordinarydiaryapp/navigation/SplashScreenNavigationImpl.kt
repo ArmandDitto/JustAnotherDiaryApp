@@ -11,8 +11,6 @@ class SplashScreenNavigationImpl : SplashScreenNavigation {
     override fun onSplashScreenComplete(activity: Activity) {
         val auth = PreferencesHelper.authToken
 
-        activity.showDefaultToast("auth: $auth")
-
         if (auth?.isNotEmpty() == true) {
             HomeActivity.launchIntent(activity)
             activity.finish()

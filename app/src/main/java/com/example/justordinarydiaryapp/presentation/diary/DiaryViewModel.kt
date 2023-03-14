@@ -10,8 +10,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.example.justordinarydiaryapp.data.paging.DiaryPagingSource
 import com.example.justordinarydiaryapp.base.paging.PagingUiModel
+import com.example.justordinarydiaryapp.data.paging.DiaryPagingSource
 import com.example.justordinarydiaryapp.data.repository.DiaryRepository
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.model.request.DiaryRequest
@@ -33,10 +33,17 @@ class DiaryViewModel(
     val diaryPagingLiveData: LiveData<PagingData<PagingUiModel<Diary>>> =
         _diaryPagingLiveData
 
-    fun createNewDiary(loginRequest: DiaryRequest) {
+    private val _diaryDetailLiveData = MutableLiveData<ResultWrapper<Diary>>()
+    val diaryDetailLiveData: LiveData<ResultWrapper<Diary>> = _diaryDetailLiveData
+
+    private val _editDiaryLiveData = MutableLiveData<ResultWrapper<Diary>>()
+    val editDiaryLiveData: LiveData<ResultWrapper<Diary>> = _editDiaryLiveData
+
+
+    fun createNewDiary(diaryRequest: DiaryRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             _createNewDiaryLiveData.postValue(ResultWrapper.Loading)
-            _createNewDiaryLiveData.postValue(repository.createNewDiary(loginRequest))
+            _createNewDiaryLiveData.postValue(repository.createNewDiary(diaryRequest))
         }
     }
 
@@ -62,6 +69,20 @@ class DiaryViewModel(
                 .cachedIn(viewModelScope).collectLatest {
                     _diaryPagingLiveData.postValue(it)
                 }
+        }
+    }
+
+    fun getDiaryDetail(diaryId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _diaryDetailLiveData.postValue(ResultWrapper.Loading)
+            _diaryDetailLiveData.postValue(repository.getDiaryDetail(diaryId))
+        }
+    }
+
+    fun editDairy(diaryId: String, request: DiaryRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _editDiaryLiveData.postValue(ResultWrapper.Loading)
+            _editDiaryLiveData.postValue(repository.getEditDiary(diaryId, request))
         }
     }
 
