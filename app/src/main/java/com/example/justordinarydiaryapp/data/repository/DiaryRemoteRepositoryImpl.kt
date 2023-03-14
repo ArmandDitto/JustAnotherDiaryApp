@@ -1,5 +1,7 @@
 package com.example.justordinarydiaryapp.data.repository
 
+import com.example.justordinarydiaryapp.data.dao.DiaryDao
+import com.example.justordinarydiaryapp.data.entity.DiaryEntity
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.model.request.DiaryRequest
 import com.example.justordinarydiaryapp.network.ApiService
@@ -9,10 +11,11 @@ import com.example.justordinarydiaryapp.network.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-class DiaryRepositoryImpl(
+class DiaryRemoteRepositoryImpl(
     private val apiService: ApiService,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
-) : DiaryRepository {
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val diaryDao: DiaryDao
+) : DiaryRepository.Remote {
 
     override suspend fun createNewDiary(request: DiaryRequest): ResultWrapper<Diary> {
         return safeApiCall(dispatcher) { apiService.crateNewDiary(request) }
@@ -31,6 +34,17 @@ class DiaryRepositoryImpl(
 
     override suspend fun getDiariesPaging(page: Int): PagingWrapper<List<Diary>> {
         return apiService.getDiariesPaging(page)
+    }
+
+    override suspend fun getDiaries(page: Int): ResultWrapper<PagingWrapper<List<Diary>>> {
+        val result = safeApiCall(dispatcher) { apiService.getDiariesPaging(page) }
+        if (result is ResultWrapper.Success) {
+            result.value.data?.forEach {
+                val diary = DiaryEntity.ModelMapper.fromDiary(it)
+                diaryDao.insertData(diary)
+            }
+        }
+        return result
     }
 
 }

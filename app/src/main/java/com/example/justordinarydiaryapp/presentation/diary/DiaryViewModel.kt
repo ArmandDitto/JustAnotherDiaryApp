@@ -15,6 +15,7 @@ import com.example.justordinarydiaryapp.data.paging.DiaryPagingSource
 import com.example.justordinarydiaryapp.data.repository.DiaryRepository
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.model.request.DiaryRequest
+import com.example.justordinarydiaryapp.network.model.PagingWrapper
 import com.example.justordinarydiaryapp.network.model.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DiaryViewModel(
-    private val repository: DiaryRepository,
+    private val repository: DiaryRepository.Remote,
 ) : ViewModel() {
 
     private val _createNewDiaryLiveData = MutableLiveData<ResultWrapper<Diary>>()
@@ -39,6 +40,8 @@ class DiaryViewModel(
     private val _editDiaryLiveData = MutableLiveData<ResultWrapper<Diary>>()
     val editDiaryLiveData: LiveData<ResultWrapper<Diary>> = _editDiaryLiveData
 
+    private val _diariesLiveData = MutableLiveData<ResultWrapper<PagingWrapper<List<Diary>>>>()
+    val diariesLiveData: LiveData<ResultWrapper<PagingWrapper<List<Diary>>>> = _diariesLiveData
 
     fun createNewDiary(diaryRequest: DiaryRequest) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -83,6 +86,17 @@ class DiaryViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _editDiaryLiveData.postValue(ResultWrapper.Loading)
             _editDiaryLiveData.postValue(repository.getEditDiary(diaryId, request))
+        }
+    }
+
+    fun fetchDiaries(page: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (page == 1) {
+                _diariesLiveData.postValue(ResultWrapper.Loading)
+                _diariesLiveData.postValue(repository.getDiaries(page))
+            } else {
+                _diariesLiveData.postValue(repository.getDiaries(page))
+            }
         }
     }
 

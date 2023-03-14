@@ -45,26 +45,26 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         _binding = null
     }
 
-    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        try {
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                val v = currentFocus
-                if (v is EditText) {
-                    val outRect = Rect()
-                    v.getGlobalVisibleRect(outRect)
-                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                        v.clearFocus()
-                        val imm =
-                            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(v.windowToken, 0)
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return super.dispatchTouchEvent(event)
-    }
+//    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+//        try {
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//                val v = currentFocus
+//                if (v is EditText) {
+//                    val outRect = Rect()
+//                    v.getGlobalVisibleRect(outRect)
+//                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+//                        v.clearFocus()
+//                        val imm =
+//                            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                        imm.hideSoftInputFromWindow(v.windowToken, 0)
+//                    }
+//                }
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//        }
+//
+//        return super.dispatchTouchEvent(event)
+//    }
 
 }

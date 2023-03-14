@@ -7,14 +7,22 @@ import com.example.justordinarydiaryapp.network.model.ResultWrapper
 
 interface DiaryRepository {
 
-    suspend fun createNewDiary(request: DiaryRequest): ResultWrapper<Diary>
+    interface Remote {
 
-    suspend fun getDiaryDetail(diaryId: String): ResultWrapper<Diary>
+        suspend fun createNewDiary(request: DiaryRequest): ResultWrapper<Diary>
+        suspend fun getDiaryDetail(diaryId: String): ResultWrapper<Diary>
+        suspend fun getEditDiary(diaryId: String, request: DiaryRequest): ResultWrapper<Diary>
+        suspend fun getDiariesPaging(page: Int): PagingWrapper<List<Diary>>
+        suspend fun getDiaries(page: Int): ResultWrapper<PagingWrapper<List<Diary>>>
 
-    suspend fun getEditDiary(diaryId: String, request: DiaryRequest): ResultWrapper<Diary>
+    }
 
-    suspend fun getDiariesPaging(
-        page: Int,
-    ): PagingWrapper<List<Diary>>
+    interface Local {
+
+        suspend fun getDiariesPagingLocal(limit: Int, offset: Int): List<Diary>
+        suspend fun searchDiariesPagingLocal(query: String, limit: Int, offset: Int): List<Diary>
+        suspend fun clearLocalData()
+
+    }
 
 }

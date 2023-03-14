@@ -11,6 +11,7 @@ import com.example.justordinarydiaryapp.R
 import com.example.justordinarydiaryapp.base.presentation.BaseActivity
 import com.example.justordinarydiaryapp.databinding.ActivityHomeBinding
 import com.example.justordinarydiaryapp.presentation.diary.DiaryListFragment
+import com.example.justordinarydiaryapp.presentation.diary.SearchDiaryFragment
 
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
@@ -58,9 +59,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = HomePagerAdapter(supportFragmentManager)
-        adapter.addFragment(DiaryListFragment())
-        adapter.addFragment(DiaryListFragment())
-        adapter.addFragment(DiaryListFragment())
+        adapter.addFragment(SearchDiaryFragment())
         viewPager.adapter = adapter
     }
 

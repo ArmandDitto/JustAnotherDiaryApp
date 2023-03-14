@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class DiaryPagingSource(
-    private val repository: DiaryRepository
+    private val repository: DiaryRepository.Remote
 ) : PagingSource<Int, Diary>() {
 
     override fun getRefreshKey(state: PagingState<Int, Diary>): Int? {
