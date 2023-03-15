@@ -81,30 +81,6 @@ class DiaryDetailFragment : BaseFragment<FragmentDetailDiaryBinding>() {
                 }
             }
         }
-
-        viewModel.unarchiveDiaryLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is ResultWrapper.Loading -> {
-                    ProgressDialog.show(requireContext())
-                }
-
-                is ResultWrapper.Success -> {
-                    ProgressDialog.dismiss()
-                    showSuccessDialog(
-                        desc = "Diary Unarchived Successfully",
-                        onDismiss = { HomeActivity.launchIntent(requireContext()) }
-                    )
-                }
-
-                is ResultWrapper.Error -> {
-                    ProgressDialog.dismiss()
-                    showErrorDialog(
-                        desc = it.message,
-                        onPositiveBtnClick = { viewModel.unarchiveDiary(diaryId) }
-                    )
-                }
-            }
-        }
     }
 
     private fun onGetDetailSuccess(diary: Diary) {

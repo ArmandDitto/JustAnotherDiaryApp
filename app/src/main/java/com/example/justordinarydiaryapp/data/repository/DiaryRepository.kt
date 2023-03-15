@@ -23,7 +23,14 @@ interface DiaryRepository {
 
         suspend fun getDiariesPagingLocal(limit: Int, offset: Int): List<Diary>
         suspend fun searchDiariesPagingLocal(query: String, limit: Int, offset: Int): List<Diary>
-        suspend fun clearLocalData()
+
+        suspend fun clearAllLocalDiary()
+
+        suspend fun getAllArchivedDiary(limit: Int, offset: Int): List<Diary>
+
+        suspend fun clearAllArchivedDiary()
+
+        suspend fun getArchivedDiaryCount() : Int
 
     }
 

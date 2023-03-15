@@ -1,6 +1,7 @@
 package com.example.justordinarydiaryapp.data.repository
 
 import com.example.justordinarydiaryapp.data.dao.DiaryDao
+import com.example.justordinarydiaryapp.data.entity.ArchivedDiaryEntity
 import com.example.justordinarydiaryapp.data.entity.DiaryEntity
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.model.request.DiaryRequest
@@ -48,11 +49,21 @@ class DiaryRemoteRepositoryImpl(
     }
 
     override suspend fun archiveDiary(diaryId: String): ResultWrapper<Diary> {
-        return safeApiCall(dispatcher) { apiService.archiveDiary(diaryId) }
+        val result = safeApiCall(dispatcher) { apiService.archiveDiary(diaryId) }
+        if (result is ResultWrapper.Success) {
+            val archivedDiary = ArchivedDiaryEntity.ModelMapper.fromDiary(result.value)
+            diaryDao.insertArchivedDiary(archivedDiary)
+        }
+        return result
     }
 
     override suspend fun unarchiveDiary(diaryId: String): ResultWrapper<Diary> {
-        return safeApiCall(dispatcher) { apiService.unArchiveDiary(diaryId) }
+        val result = safeApiCall(dispatcher) { apiService.unArchiveDiary(diaryId) }
+        if (result is ResultWrapper.Success) {
+            val archivedDiary = ArchivedDiaryEntity.ModelMapper.fromDiary(result.value)
+            diaryDao.deleteArchivedDiary(archivedDiary)
+        }
+        return result
     }
 
 }

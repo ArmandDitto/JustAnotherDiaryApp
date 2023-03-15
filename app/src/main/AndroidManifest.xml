@@ -50,6 +50,10 @@
             android:name=".presentation.diary.EditDiaryActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".presentation.diary.ArchivedDiaryActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

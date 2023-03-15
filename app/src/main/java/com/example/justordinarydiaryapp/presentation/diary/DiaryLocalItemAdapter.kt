@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.justordinarydiaryapp.databinding.ItemDiaryBinding
 import com.example.justordinarydiaryapp.model.Diary
 import com.example.justordinarydiaryapp.utils.DateTimeHelper
+import com.example.justordinarydiaryapp.utils.extension.visibleView
 
-class DiaryLocalItemAdapter :
+class DiaryLocalItemAdapter(isArchiveMenu: Boolean? = false) :
     PagingDataAdapter<Diary, DiaryLocalItemAdapter.MainViewHolder>(DIFF_CALLBACK) {
 
     var onRootClick: ((data: Diary) -> Unit)? = null
+    var onUnarchived: ((data: Diary) -> Unit)? = null
+    var isInArchiveMenu = isArchiveMenu
 
     inner class MainViewHolder(val binding: ItemDiaryBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -37,6 +40,12 @@ class DiaryLocalItemAdapter :
             tvCreatedTime.text = String.format("Created at %s", dateCreated)
             cvItemDiary.setOnClickListener {
                 data?.let { diary -> onRootClick?.invoke(diary) }
+            }
+            if(isInArchiveMenu == true) {
+                cvUnarchive.visibleView()
+                cvUnarchive.setOnClickListener {
+                    data?.let { onUnarchived?.invoke(it) }
+                }
             }
         }
     }

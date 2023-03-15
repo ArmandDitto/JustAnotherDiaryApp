@@ -47,12 +47,12 @@ interface ApiService {
         @Body diaryRequest: DiaryRequest
     ): Diary
 
-    @PUT("diary/{diary_id}/archive")
+    @PUT("diary/{diary_id}/archieve")
     suspend fun archiveDiary(
         @Path("diary_id") diaryId: String
     ): Diary
 
-    @PUT("diary/{diary_id}/unarchive")
+    @PUT("diary/{diary_id}/unarchieve")
     suspend fun unArchiveDiary(
         @Path("diary_id") diaryId: String
     ): Diary

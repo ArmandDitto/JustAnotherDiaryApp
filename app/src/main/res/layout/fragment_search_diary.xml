@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvProfile"
+        android:id="@+id/cvArchive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
-        app:layout_constraintStart_toEndOf="@id/cvProfile"
+        app:layout_constraintStart_toEndOf="@id/cvArchive"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText

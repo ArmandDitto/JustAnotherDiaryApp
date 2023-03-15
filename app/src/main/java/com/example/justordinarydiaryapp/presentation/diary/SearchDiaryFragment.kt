@@ -42,6 +42,7 @@ class SearchDiaryFragment : BaseFragment<FragmentSearchDiaryBinding>() {
     }
 
     private fun fetchData(loadPage: Int) {
+        if (page == 1) localViewModel.clearLocalDiaries()
         viewModel.fetchDiaries(loadPage)
         page += 1
     }
@@ -75,7 +76,7 @@ class SearchDiaryFragment : BaseFragment<FragmentSearchDiaryBinding>() {
                     ProgressDialog.dismiss()
                     showErrorDialog(
                         desc = it.message,
-                        onDismiss = { requireActivity().finish() },
+                        onDismiss = { fetchData(page) },
                         isCancelable = true
                     )
                 }
@@ -118,15 +119,8 @@ class SearchDiaryFragment : BaseFragment<FragmentSearchDiaryBinding>() {
             false
         }
 
-        binding.cvProfile.setOnClickListener {
-            showConfimationDialog(
-                title = "Warning",
-                desc = "Are you sure do you want to log out ?",
-                onPositiveBtnClick = {
-                    localViewModel.clearLocalDiaries()
-                    navigation.onLogOut(requireActivity())
-                }
-            )
+        binding.cvArchive.setOnClickListener {
+            ArchivedDiaryActivity.launchIntent(requireContext())
         }
 
         binding.btnCompose.setOnClickListener {
