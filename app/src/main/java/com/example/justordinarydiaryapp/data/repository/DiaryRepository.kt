@@ -14,6 +14,8 @@ interface DiaryRepository {
         suspend fun getEditDiary(diaryId: String, request: DiaryRequest): ResultWrapper<Diary>
         suspend fun getDiariesPaging(page: Int): PagingWrapper<List<Diary>>
         suspend fun getDiaries(page: Int): ResultWrapper<PagingWrapper<List<Diary>>>
+        suspend fun archiveDiary(diaryId: String): ResultWrapper<Diary>
+        suspend fun unarchiveDiary(diaryId: String): ResultWrapper<Diary>
 
     }
 

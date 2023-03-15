@@ -47,8 +47,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     ProgressDialog.dismiss()
                     showErrorDialog(
                         desc = it.message,
-                        btnPositiveText = getString(R.string.text_action_close),
-                        isCancelable = true
+                        onPositiveBtnClick = { sendData() }
                     )
                 }
             }
@@ -84,16 +83,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.btnLogin.setOnClickListener {
             if (isDataValid) {
-                viewModel.login(
-                    LoginRequest(
-                        binding.txtEmail.text.toString(),
-                        binding.txtPassword.text.toString()
-                    )
-                )
+                sendData()
             } else {
                 showToast(requireContext().getString(R.string.text_error_form_remaining_field))
             }
         }
+    }
+
+    private fun sendData() {
+        viewModel.login(
+            LoginRequest(
+                binding.txtEmail.text.toString(),
+                binding.txtPassword.text.toString()
+            )
+        )
     }
 
     private val isDataValid: Boolean

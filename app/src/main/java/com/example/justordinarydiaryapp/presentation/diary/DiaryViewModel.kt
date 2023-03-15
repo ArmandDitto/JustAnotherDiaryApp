@@ -43,6 +43,12 @@ class DiaryViewModel(
     private val _diariesLiveData = MutableLiveData<ResultWrapper<PagingWrapper<List<Diary>>>>()
     val diariesLiveData: LiveData<ResultWrapper<PagingWrapper<List<Diary>>>> = _diariesLiveData
 
+    private val _archiveDiaryLiveData = MutableLiveData<ResultWrapper<Diary>>()
+    val archiveDiaryLiveData: LiveData<ResultWrapper<Diary>> = _archiveDiaryLiveData
+
+    private val _unarchiveDiaryLiveData = MutableLiveData<ResultWrapper<Diary>>()
+    val unarchiveDiaryLiveData: LiveData<ResultWrapper<Diary>> = _unarchiveDiaryLiveData
+
     fun createNewDiary(diaryRequest: DiaryRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             _createNewDiaryLiveData.postValue(ResultWrapper.Loading)
@@ -97,6 +103,20 @@ class DiaryViewModel(
             } else {
                 _diariesLiveData.postValue(repository.getDiaries(page))
             }
+        }
+    }
+
+    fun archiveDiary(diaryId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _archiveDiaryLiveData.postValue(ResultWrapper.Loading)
+            _archiveDiaryLiveData.postValue(repository.archiveDiary(diaryId))
+        }
+    }
+
+    fun unarchiveDiary(diaryId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _unarchiveDiaryLiveData.postValue(ResultWrapper.Loading)
+            _unarchiveDiaryLiveData.postValue(repository.unarchiveDiary(diaryId))
         }
     }
 

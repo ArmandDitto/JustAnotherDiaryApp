@@ -10,7 +10,7 @@ fun FragmentManager.showErrorDialog(
     onPositiveBtnClick: (() -> Unit)? = null,
     onDismiss: (() -> Unit)? = null,
     withCloseIcon: Boolean = false,
-    isCancelable: Boolean = false
+    isCancelable: Boolean = true
 ) {
     val dialog = BaseAlertDialog()
 
@@ -37,7 +37,7 @@ fun FragmentManager.showSuccessDialog(
     onPositiveBtnClick: (() -> Unit)? = null,
     onDismiss: (() -> Unit)? = null,
     withCloseIcon: Boolean = false,
-    isCancelable: Boolean = false
+    isCancelable: Boolean = true
 ) {
     val dialog = BaseAlertDialog()
 
@@ -47,6 +47,37 @@ fun FragmentManager.showSuccessDialog(
         imageSrc = null,
         btnPositiveText = btnPositiveText ?: "Continue",
         onPositiveBtnClick = onPositiveBtnClick,
+        onDismiss = onDismiss,
+        withCloseIcon = withCloseIcon,
+        isCancelable = isCancelable
+    )
+
+    val ft = beginTransaction()
+    ft.add(dialog, null)
+    ft.commit()
+}
+
+fun FragmentManager.showConfirmationDialog(
+    title: String? = null,
+    desc: String? = null,
+    btnPositiveText: String? = null,
+    onPositiveBtnClick: (() -> Unit)? = null,
+    btnNegativeText: String? = null,
+    onNegativeBtnClick: (() -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
+    withCloseIcon: Boolean = false,
+    isCancelable: Boolean = true
+) {
+    val dialog = BaseAlertDialog()
+
+    dialog.setContent(
+        title = title ?: "Confirmation",
+        desc = desc ?: "Are you sure ?",
+        imageSrc = null,
+        btnPositiveText = btnPositiveText ?: "Yes",
+        onPositiveBtnClick = onPositiveBtnClick,
+        btnNegativeText = btnNegativeText ?: "No",
+        onNegativeBtnClick = onNegativeBtnClick,
         onDismiss = onDismiss,
         withCloseIcon = withCloseIcon,
         isCancelable = isCancelable

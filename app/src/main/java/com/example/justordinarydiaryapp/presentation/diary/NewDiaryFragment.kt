@@ -41,14 +41,16 @@ class NewDiaryFragment : BaseFragment<FragmentNewDiaryBinding>() {
                     ProgressDialog.dismiss()
                     showSuccessDialog(
                         desc = "Diary Saved Successfully",
-                        onDismiss = { HomeActivity.launchIntent(requireContext()) },
-                        isCancelable = true
+                        onDismiss = { HomeActivity.launchIntent(requireContext()) }
                     )
                 }
 
                 is ResultWrapper.Error -> {
                     ProgressDialog.dismiss()
-                    showErrorDialog(it.message)
+                    showErrorDialog(
+                        desc = it.message,
+                        onPositiveBtnClick = { sendData() }
+                    )
                 }
             }
         }
@@ -72,20 +74,25 @@ class NewDiaryFragment : BaseFragment<FragmentNewDiaryBinding>() {
         )
         binding.tvCurrentTime.text = text
 
-        binding.apply {
-            cvSave.setOnClickListener {
-                if (isDataValid) {
-                    viewModel.createNewDiary(
-                        DiaryRequest(
-                            txtTitleDiary.text.toString(),
-                            txtContentDiary.text.toString()
-                        )
-                    )
-                } else {
-                    showToast("Please fill title and content")
-                }
+        binding.cvSave.setOnClickListener {
+            if (isDataValid) {
+                showConfimationDialog(
+                    desc = "Do you really want to save this diary ?",
+                    onPositiveBtnClick = { sendData() },
+                )
+            } else {
+                showToast("Please fill title and content")
             }
         }
+    }
+
+    private fun sendData() {
+        viewModel.createNewDiary(
+            DiaryRequest(
+                binding.txtTitleDiary.text.toString(),
+                binding.txtContentDiary.text.toString()
+            )
+        )
     }
 
     private val isDataValid: Boolean

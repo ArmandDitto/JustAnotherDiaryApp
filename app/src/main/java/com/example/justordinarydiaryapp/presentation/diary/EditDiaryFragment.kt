@@ -51,7 +51,10 @@ class EditDiaryFragment : BaseFragment<FragmentEditDiaryBinding>() {
 
                 is ResultWrapper.Error -> {
                     ProgressDialog.dismiss()
-                    showErrorDialog(it.message)
+                    showErrorDialog(
+                        desc = it.message,
+                        onPositiveBtnClick = { sendData() }
+                    )
                 }
             }
         }
@@ -78,21 +81,26 @@ class EditDiaryFragment : BaseFragment<FragmentEditDiaryBinding>() {
         )
         binding.tvCurrentTime.text = text
 
-        binding.apply {
-            cvSave.setOnClickListener {
-                if (isDataValid) {
-                    viewModel.editDairy(
-                        diaryData?.id.toString(),
-                        DiaryRequest(
-                            txtTitleDiary.text.toString(),
-                            txtContentDiary.text.toString()
-                        )
-                    )
-                } else {
-                    showToast("Please fill title and content")
-                }
+        binding.cvSave.setOnClickListener {
+            if (isDataValid) {
+                showConfimationDialog(
+                    desc = "Do you really want to update this diary ?",
+                    onPositiveBtnClick = { sendData() },
+                )
+            } else {
+                showToast("Please fill title and content")
             }
         }
+    }
+
+    private fun sendData() {
+        viewModel.editDairy(
+            diaryData?.id.toString(),
+            DiaryRequest(
+                binding.txtTitleDiary.text.toString(),
+                binding.txtContentDiary.text.toString()
+            )
+        )
     }
 
     private val isDataValid: Boolean

@@ -5,6 +5,8 @@
     <color name="color_primary_alt">#CE3338</color>
     <color name="color_primary_alt_darker">#7C1F22</color>
 
+    <color name="color_cadmium_orange">#F28C28</color>
+
     <color name="color_black">#000000</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_transparant_black">#CC000000</color>

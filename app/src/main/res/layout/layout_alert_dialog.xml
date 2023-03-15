@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,17 +76,21 @@
                     android:padding="@dimen/margin_xlarge"
                     android:weightSum="2">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_negative"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_small"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/color_white"
                         android:textAllCaps="false"
+                        android:textColor="@color/color_primary"
                         android:textSize="@dimen/text_xlarge"
+                        app:strokeColor="@color/color_primary"
+                        app:strokeWidth="1dp"
                         tools:text="No" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_positive"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -12,11 +12,13 @@ import com.example.justordinarydiaryapp.base.paging.LocalPagingLoadStateAdapter
 import com.example.justordinarydiaryapp.base.presentation.BaseFragment
 import com.example.justordinarydiaryapp.base.presentation.ProgressDialog
 import com.example.justordinarydiaryapp.databinding.FragmentSearchDiaryBinding
+import com.example.justordinarydiaryapp.navigation.DashboardNavigation
 import com.example.justordinarydiaryapp.network.model.ResultWrapper
 import com.example.justordinarydiaryapp.utils.extension.goneView
 import com.example.justordinarydiaryapp.utils.extension.onScrolledListener
 import com.example.justordinarydiaryapp.utils.extension.setAutoNullAdapter
 import com.example.justordinarydiaryapp.utils.extension.visibleView
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -26,6 +28,7 @@ class SearchDiaryFragment : BaseFragment<FragmentSearchDiaryBinding>() {
     private val localViewModel: DiaryLocalViewModel by viewModel()
     private lateinit var diaryLocalItemAdapter: DiaryLocalItemAdapter
     private var page = INIT_PAGE
+    private val navigation: DashboardNavigation by inject()
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSearchDiaryBinding
         get() = FragmentSearchDiaryBinding::inflate
@@ -113,6 +116,17 @@ class SearchDiaryFragment : BaseFragment<FragmentSearchDiaryBinding>() {
                 }
             }
             false
+        }
+
+        binding.cvProfile.setOnClickListener {
+            showConfimationDialog(
+                title = "Warning",
+                desc = "Are you sure do you want to log out ?",
+                onPositiveBtnClick = {
+                    localViewModel.clearLocalDiaries()
+                    navigation.onLogOut(requireActivity())
+                }
+            )
         }
 
         binding.btnCompose.setOnClickListener {

@@ -47,4 +47,12 @@ class DiaryRemoteRepositoryImpl(
         return result
     }
 
+    override suspend fun archiveDiary(diaryId: String): ResultWrapper<Diary> {
+        return safeApiCall(dispatcher) { apiService.archiveDiary(diaryId) }
+    }
+
+    override suspend fun unarchiveDiary(diaryId: String): ResultWrapper<Diary> {
+        return safeApiCall(dispatcher) { apiService.unArchiveDiary(diaryId) }
+    }
+
 }

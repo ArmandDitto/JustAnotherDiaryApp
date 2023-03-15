@@ -57,7 +57,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
                 is ResultWrapper.Error -> {
                     ProgressDialog.dismiss()
-                    showErrorDialog(it.message)
+                    showErrorDialog(
+                        desc = it.message,
+                        onPositiveBtnClick = { sendData() }
+                    )
                 }
             }
         }
@@ -67,14 +70,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding.apply {
             btnRegister.setOnClickListener {
-                viewModel.register(
-                    RegisterRequest(
-                        txtEmail.text.toString(),
-                        txtUsername.text.toString(),
-                        txtPassword.text.toString(),
-                        txtConfirmPassword.text.toString()
-                    )
-                )
+                sendData()
             }
         }
 
@@ -135,6 +131,19 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 LoginActivity.launchIntent(requireContext())
             }
         )
+    }
+
+    private fun sendData() {
+        binding.apply {
+            viewModel.register(
+                RegisterRequest(
+                    txtEmail.text.toString(),
+                    txtUsername.text.toString(),
+                    txtPassword.text.toString(),
+                    txtConfirmPassword.text.toString()
+                )
+            )
+        }
     }
 
     private fun validateConfirmPassword(text: String?) {
